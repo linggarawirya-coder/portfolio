@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Tarisa Fadilah | Finance & Mahasiswa</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+      background: #fefcf5;
+      color: #1e1e2a;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* dynamic gradient background dengan interaksi */
+    .dynamic-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: linear-gradient(125deg, #f8f0e7 0%, #e9f5e9 40%, #fde9e9 100%);
+      transition: background 0.3s ease;
+    }
+
+    /* efek warna dinamis mengikuti hover pada elemen tertentu (interaktif) */
+    .color-shift {
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    /* custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f0e6d8;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #9b59b6;
+      border-radius: 20px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #e67e22;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* navbar sederhana dan modern */
+    .navbar {
+      background: rgba(255, 252, 245, 0.92);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid rgba(155, 89, 182, 0.2);
+      transition: all 0.2s;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #2e7d32, #9b59b6, #e67e22);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #2c3e2f;
+      transition: 0.2s;
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: #9b59b6;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background: #e67e22;
+      transition: 0.2s;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 680px) {
+      .nav-container {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .nav-links {
+        gap: 1.3rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    /* hero section interaktif */
+    .hero {
+      padding: 4rem 0 2.5rem;
+    }
+    .hero-content {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(46, 125, 50, 0.15);
+      color: #2e7d32;
+      padding: 0.3rem 1rem;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(4px);
+    }
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(125deg, #1b4d1f, #9b59b6, #d35400);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.8rem;
+    }
+    .highlight {
+      background: linear-gradient(145deg, #e67e22, #c0392b);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 800;
+    }
+    .hero-desc {
+      font-size: 1.2rem;
+      color: #2c3e2f;
+      margin: 1.2rem 0;
+    }
+    .divider {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #9b59b6, #e67e22, #2e7d32);
+      margin: 1rem auto;
+      border-radius: 4px;
+    }
+
+    /* tombol interaktif */
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1.8rem;
+    }
+    .btn {
+      padding: 0.7rem 1.6rem;
+      border-radius: 40px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      display: inline-block;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: #9b59b6;
+      color: white;
+      box-shadow: 0 2px 6px rgba(155, 89, 182, 0.3);
+    }
+    .btn-primary:hover {
+      background: #8e44ad;
+      transform: scale(1.02);
+      box-shadow: 0 8px 18px rgba(155, 89, 182, 0.4);
+    }
+    .btn-secondary {
+      background: #e67e22;
+      color: white;
+    }
+    .btn-secondary:hover {
+      background: #d35400;
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #2e7d32;
+      color: #2e7d32;
+    }
+    .btn-outline:hover {
+      background: #e8f5e9;
+      border-color: #9b59b6;
+      color: #9b59b6;
+    }
+
+    /* section grid umum */
+    section {
+      padding: 3.5rem 0;
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+    .section-title span {
+      background: linear-gradient(120deg, #2e7d32, #9b59b6);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .card {
+      background: rgba(255, 255, 245, 0.8);
+      backdrop-filter: blur(2px);
+      border-radius: 2rem;
+      padding: 1.6rem;
+      transition: all 0.3s;
+      border: 1px solid rgba(155, 89, 182, 0.2);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02);
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #e67e22;
+      box-shadow: 0 20px 30px -12px rgba(46, 125, 50, 0.15);
+      background: white;
+    }
+    .card-icon {
+      font-size: 2.6rem;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      margin-bottom: 0.5rem;
+      color: #2c3e2f;
+    }
+
+    /* keahlian + interest spesifik: kambing, cort, swiss  */
+    .flex-interest {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+    .chip {
+      background: #f3e5f5;
+      padding: 0.4rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 500;
+      color: #6a1b9a;
+      transition: 0.2s;
+    }
+    .chip:hover {
+      background: #ffecb3;
+      color: #e67e22;
+      transform: scale(1.02);
+    }
+    .green-chip {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+    .red-chip {
+      background: #ffebee;
+      color: #c0392b;
+    }
+    .purple-chip {
+      background: #ede7f6;
+      color: #6a1b9a;
+    }
+
+    /* bagian swiss dream */
+    .dream-card {
+      background: linear-gradient(135deg, rgba(46,125,50,0.05), rgba(155,89,182,0.05));
+      border-radius: 2rem;
+      padding: 1.8rem;
+      text-align: center;
+      border-left: 6px solid #e67e22;
+    }
+
+    /* timeline sederhana */
+    .timeline-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+      align-items: baseline;
+    }
+    .timeline-year {
+      font-weight: 800;
+      background: #e67e22;
+      color: white;
+      padding: 0.2rem 0.9rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    /* footer */
+    footer {
+      background: #1e2a1f;
+      color: #e0e0d0;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 2rem;
+      border-top: 3px solid #9b59b6;
+    }
+
+    /* interaktif dinamis: hover elemen mengubah background dynamic */
+    .interactive-trigger:hover ~ .dynamic-bg {
+      background: radial-gradient(circle at 30% 40%, #f9e0b0, #f0d9e7);
+    }
+
+    button, a, .card, .chip, .btn {
+      transition: all 0.25s;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background dinamis bergerak mengikuti interaksi (akan berubah dengan hover pada tombol / kartu menggunakan js sederhana) -->
+<div class="dynamic-bg" id="dynamicBg"></div>
+
+<header class="navbar">
+  <div class="container nav-container">
+    <div class="logo">✨ Tarisa Fadilah</div>
+    <ul class="nav-links">
+      <li><a href="#home">Beranda</a></li>
+      <li><a href="#about">Tentang</a></li>
+      <li><a href="#passion">Minat</a></li>
+      <li><a href="#dream">Cita-Cita</a></li>
+      <li><a href="#contact">Kontak</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- Hero / Home -->
+  <section id="home" class="hero">
+    <div class="container hero-content">
+      <div class="badge">🌈 Halo Warga! 🌈</div>
+      <h1>Tarisa <span class="highlight">Fadilah</span></h1>
+      <div class="divider"></div>
+      <p class="hero-desc">
+        Finance di <strong>Master Kuliner Indonesia</strong> • Mahasiswa Manajemen Universitas Terbuka (Semester 2) <br>
+        💜 Pecinta Cort (terutama James) 🐐 & gemar petualangan rasa.
+      </p>
+      <div class="btn-group">
+        <a href="#passion" class="btn btn-primary">✨ Lihat Minat Unikku</a>
+        <a href="#dream" class="btn btn-secondary">🇨🇭 Mimpi Swiss</a>
+        <a href="#contact" class="btn btn-outline">📬 Hubungi</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About: Finance + Mahasiswa -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title"><span>▸ Tentang Diriku ◂</span></h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">💼</div>
+          <h3>Finance di Master Kuliner Indonesia</h3>
+          <p>Mengelola arus keuangan, analisa biaya operasional, dan mendukung pertumbuhan bisnis kuliner yang lezat. Saya suka memastikan setiap rupiah bekerja optimal.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <h3>Mahasiswa Manajemen – UT</h3>
+          <p>Semester 2, Universitas Terbuka. Mendalami manajemen bisnis, strategi pemasaran, dan pengembangan sumber daya. Keseimbangan kerja & kuliah adalah keahlian tersendiri!</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">❤️</div>
+          <h3>Kepribadian & Gaya Hidup</h3>
+          <p>Suka tantangan, analitis namun penuh warna. Dari mengurus finansial sampai mendengarkan lagu-lagu cort di sela kerjaan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Passion section: Cort (James) , Kambing , Warna dinamis -->
+  <section id="passion" style="background: rgba(245, 240, 250, 0.5); border-radius: 48px; margin: 1rem 0;">
+    <div class="container">
+      <h2 class="section-title"><span>💜 Obsesi & Warna Favorit 💚❤️💜</span></h2>
+      <div class="flex-interest" style="margin-bottom: 2rem;">
+        <div class="chip purple-chip">🎸 Cort (Personil James)</div>
+        <div class="chip green-chip">🐐 Kambing ❤️  (peliharaan & kegemaran)</div>
+        <div class="chip red-chip">🎨 Warna Hijau • Merah • Ungu Dinamis</div>
+      </div>
+      <div class="card-grid">
+        <div class="card interactive-card">
+          <div class="card-icon">🎵</div>
+          <h3>My Favorite: Cort & James</h3>
+          <p>Personil James di band Cort adalah sumber inspirasiku! Musiknya mengalir seperti arus keuangan yang harmonis. Setiap nada memberi semangat baru 💜.</p>
+          <div style="margin-top: 10px; font-style: italic;">"James' vibe = energi positif untuk bekerja dan belajar."</div>
+        </div>
+        <div class="card interactive-card">
+          <div class="card-icon">🐏</div>
+          <h3>Kambing: Lebih dari Sekadar Hewan</h3>
+          <p>Sangat menyukai kambing, mulai dari karakter lucu hingga potensi bisnis peternakan. Rencana besar: ternak kambing modern suatu hari nanti.</p>
+          <div class="flex-interest" style="justify-content: start; margin-top: 12px;">
+            <span class="chip green-chip">Kambing Etawa</span>
+            <span class="chip red-chip">Susu Kambing</span>
+          </div>
+        </div>
+        <div class="card interactive-card">
+          <div class="card-icon">🎨</div>
+          <h3>Palet Dinamis : Hijau, Merah, Ungu</h3>
+          <p>Hijau (pertumbuhan, keuangan), Merah (semangat, cinta), Ungu (kreativitas, cort). Perpaduan ini mewakili diriku yang berani dan dinamis.</p>
+          <div style="background: linear-gradient(90deg, #2e7d32, #e63946, #9b59b6); height: 6px; width: 100%; border-radius: 6px; margin-top: 12px;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cita-cita: lahan di Swiss + interaktif -->
+  <section id="dream">
+    <div class="container">
+      <h2 class="section-title"><span>🇨🇭 Cita-Cita Besar: Lahan di Swiss 🇨🇭</span></h2>
+      <div class="dream-card">
+        <span style="font-size: 3rem;">🏔️ 🐑 🧀</span>
+        <h3 style="margin: 0.5rem 0;">Memiliki lahan hijau di Pegunungan Alpen, Swiss</h3>
+        <p>Impianku adalah membeli sebidang lahan di Swiss, mengembangkan agrowisata kecil, memelihara kambing dan menikmati pemandangan pegunungan. Perpaduan antara manajemen keuangan, cinta alam, dan jiwa petualang.</p>
+        <div class="flex-interest" style="margin-top: 1rem;">
+          <span class="chip green-chip">🌱 Lahan Organik</span>
+          <span class="chip purple-chip">🏞️ Swiss Valley</span>
+          <span class="chip red-chip">🐐 Goat Farm</span>
+        </div>
+        <div style="margin-top: 1rem;">
+          <button id="swissDreamBtn" class="btn btn-primary" style="background: #d35400;">✨ Bagikan Mimpiku ✨</button>
+        </div>
+        <p id="dreamMessage" style="margin-top: 1rem; font-size: 0.9rem; color: #7b4b2a;"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Perjalanan & timeline singkat -->
+  <section style="padding-top: 0;">
+    <div class="container">
+      <h2 class="section-title"><span>📌 Sekilas Perjalanan</span></h2>
+      <div style="max-width: 600px; margin: 0 auto;">
+        <div class="timeline-item">
+          <div class="timeline-year">2024 - skrg</div>
+          <div><strong>Finance di Master Kuliner Indonesia</strong> – Mengelola laporan keuangan & budget planning.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2025</div>
+          <div><strong>Mahasiswa Manajemen UT</strong> – Semester 2, topik: manajemen operasional & keuangan bisnis.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">Mimpi</div>
+          <div><strong>Swiss Land Project</strong> – Menabung, investasi, dan mewujudkan lahan impian.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontak sederhana dan interaktif -->
+  <section id="contact" style="background: #fffaf0;">
+    <div class="container">
+      <h2 class="section-title"><span>📫 Hubungi & Kolaborasi</span></h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
+        <div class="card" style="flex:1; min-width: 240px;">
+          <div class="card-icon">📧</div>
+          <h3>Email</h3>
+          <p>tarisa.fadilah@mkuliner.id</p>
+          <p style="font-size: 0.8rem;">(untuk keperluan finance & networking)</p>
+        </div>
+        <div class="card" style="flex:1; min-width: 240px;">
+          <div class="card-icon">📱</div>
+          <h3>Media sosial</h3>
+          <p>Instagram: @tarisa_fd</p>
+          <p>Twitter: @tarisa_cortlover</p>
+        </div>
+        <div class="card" style="flex:1; min-width: 240px;">
+          <div class="card-icon">💬</div>
+          <h3>Diskusi Asyik</h3>
+          <p>Soal cort, kambing, atau tips manajemen keuangan? Mari ngobrol!</p>
+          <button id="contactBtn" class="btn btn-outline" style="margin-top: 12px;">Kirim sapaan</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>✨ Tarisa Fadilah — Finance Enthusiast, Cort Lover (James), Goat Dreamer 🐐✨</p>
+  <p style="margin-top: 6px; font-size: 0.8rem;">Hijau • Merah • Ungu | Dinamis & Interaktif | Swiss di hati</p>
+  <p style="margin-top: 8px;">© 2026 — Terima kasih sudah mampir 💜💚❤️</p>
+</footer>
+
+<script>
+  (function() {
+    // 1. Background dinamis interaktif: berubah gradien saat hover elemen pilihan
+    const dynamicBg = document.getElementById('dynamicBg');
+    const interactiveCards = document.querySelectorAll('.interactive-card, .dream-card, .btn, .chip');
+    
+    function changeBgToDynamic(colorSet) {
+      if(!dynamicBg) return;
+      if(colorSet === 'purpleGreen') {
+        dynamicBg.style.background = "radial-gradient(circle at 70% 20%, #f3e5f5, #e0f2e9)";
+      } else if(colorSet === 'redWarm') {
+        dynamicBg.style.background = "radial-gradient(circle at 30% 80%, #ffebee, #fff3e0)";
+      } else if(colorSet === 'swiss') {
+        dynamicBg.style.background = "linear-gradient(125deg, #e8f0e0, #f9e0c0, #eeddff)";
+      } else {
+        dynamicBg.style.background = "linear-gradient(125deg, #f8f0e7, #e9f5e9, #fde9e9)";
+      }
+    }
+    
+    // event listener untuk hover pada chip & card, menambah interaksi warna 
+    const elementsHover = document.querySelectorAll('.card, .chip, .btn, .dream-card');
+    elementsHover.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        if(el.classList.contains('purple-chip') || el.innerHTML.includes('James')) {
+          dynamicBg.style.background = "radial-gradient(circle at 40% 50%, #f3e0ff, #fef7e0)";
+        } else if(el.classList.contains('green-chip') || el.innerHTML.includes('Kambing')) {
+          dynamicBg.style.background = "radial-gradient(circle at 60% 30%, #dcfce7, #fff3e6)";
+        } else if(el.classList.contains('red-chip')) {
+          dynamicBg.style.background = "radial-gradient(circle at 20% 70%, #ffe4e2, #f9f0dd)";
+        } else {
+          dynamicBg.style.background = "linear-gradient(135deg, #e9f0da, #ffe0f0, #fde9d4)";
+        }
+      });
+      el.addEventListener('mouseleave', () => {
+        dynamicBg.style.background = "linear-gradient(125deg, #f8f0e7, #e9f5e9, #fde9e9)";
+      });
+    });
+    
+    // tombol dream Swiss
+    const swissBtn = document.getElementById('swissDreamBtn');
+    const dreamMsg = document.getElementById('dreamMessage');
+    if(swissBtn) {
+      swissBtn.addEventListener('click', () => {
+        dreamMsg.innerHTML = "🎉 Terima kasih! Lahan di Swiss bukan hanya mimpi, langkah kecil dimulai dari sekarang! 🇨🇭🐐💚💜❤️";
+        dreamMsg.style.fontWeight = "bold";
+        dreamMsg.style.color = "#9b59b6";
+        dynamicBg.style.background = "radial-gradient(circle at 50% 50%, #e3f2e3, #ffe6e6, #f3e5ff)";
+        setTimeout(() => {
+          dynamicBg.style.background = "linear-gradient(125deg, #f8f0e7, #e9f5e9, #fde9e9)";
+        }, 800);
+      });
+    }
+    
+    // tombol kontak sapaan
+    const contactBtn = document.getElementById('contactBtn');
+    if(contactBtn) {
+      contactBtn.addEventListener('click', () => {
+        alert("Halo! Terima kasih sudah reach out ✨ Tarisa akan segera membalas. Suka cort? atau ngobrolin finansial?");
+      });
+    }
+    
+    // smooth scroll untuk semua internal link
+    const links = document.querySelectorAll('a[href^="#"]');
+    links.forEach(link => {
+      link.addEventListener('click', function(e) {
+        const target = this.getAttribute('href');
+        if(target === "#" || target === "") return;
+        const targetEl = document.querySelector(target);
+        if(targetEl) {
+          e.preventDefault();
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.pushState(null, null, target);
+        }
+      });
+    });
+    
+    // efek tambahan: ikon warna dinamis pada title
+    console.log("Portfolio Tarisa — dinamis dengan hijau, merah, ungu, cort, kambing, dan Swiss!");
+  })();
+</script>
+</body>
+</html>
